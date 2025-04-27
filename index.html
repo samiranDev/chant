@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21-Day Sankalp Tracker</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            margin: 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            color: #4CAF50;
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+        }
+
+        .progress-bar {
+            background-color: #444;
+            border-radius: 10px;
+            padding: 5px;
+            margin: 15px 0;
+        }
+
+        .mantras {
+            margin-top: 15px;
+            background-color: #444;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .mantras h4 {
+            color: #4CAF50;
+            margin-bottom: 10px;
+        }
+
+        .mantras ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .mantras ul li {
+            margin: 8px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+
+        #day-list {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        #day-list li {
+            padding: 8px;
+            margin: 4px;
+            background-color: #444;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #day-list input {
+            margin-right: 10px;
+            accent-color: green;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin-top: 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .reset-section {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .reset-section input {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        .reset-section button {
+            width: 100%;
+        }
+
+        /* Chant Section */
+        .chant-section {
+            margin-top: 30px;
+            background-color: #444;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .chant-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 50px;
+            font-size: 2rem;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+
+        .reset-chant-button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 1rem;
+            width: 100px;
+            border-radius: 50%;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .reset-chant-button:hover {
+            background-color: #e53935;
+        }
+
+        .chant-counter {
+            font-size: 1.5rem;
+            color: #ddd;
+        }
+
+        /* Mobile optimization */
+        @media (max-width: 576px) {
+            .container {
+                padding: 15px;
+            }
+
+            .section-title {
+                font-size: 1rem;
+            }
+
+            button {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .chant-button {
+                padding: 40px;
+                font-size: 1.5rem;
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Title and Small Description -->
+        <h1>21-Day Sankalp Tracker</h1>
+        <p>Track your daily progress in chanting and Sankalp to bring positive changes into your life.</p>
+
+        <!-- Days and Progress Bar -->
+        <div id="tracker">
+            <h3 class="section-title">Days:</h3>
+            <ul id="day-list">
+                <!-- Days will be generated here -->
+            </ul>
+            <div class="progress-bar">
+                <div class="progress" id="progress-bar" style="height: 30px; width: 0%; background-color: #4CAF50; border-radius: 10px;"></div>
+            </div>
+        </div>
+
+        <!-- Submit Button for Progress -->
+        <button id="submit-btn" class="btn btn-success">Submit Today’s Progress</button>
+
+        <!-- Progress Text -->
+        <div id="progress">
+            <h3 class="section-title">Progress:</h3>
+            <p id="completed-days">0/21 Days Completed</p>
+        </div>
+
+        <!-- Mantras Section -->
+        <div class="mantras">
+            <h4>Mantras to Chant:</h4>
+            <ul>
+                <li>1. Om Namah Shivaya</li>
+                <li>2. Om Hanumate Namah</li>
+                <li>3. Om Kreem Kalikaye Namah</li>
+                <li>4. Om Kleem Krishnaye Namah</li>
+            </ul>
+        </div>
+
+        <!-- Sankalp Section -->
+        <div class="gratitude">
+            <h4 class="section-title">Daily Sankalp (Before Chanting):</h4>
+            <p>**"ওṃ শিব ঠাকুর, হনুমানজি, মা কালী এবং শ্রীকৃষ্ণ,   
+            আমি আজকে আপনার কৃপায় আমার জীবনে সাফল্য, শান্তি, এবং আনন্দ আনার জন্য আপনাদের ধন্যবাদ জানাচ্ছি।   
+            আপনার আশীর্বাদে আমার উদ্দেশ্য পূর্ণ হবে এবং আমি শ্রীমুখী হবো।   
+            অনুগ্রহ করে আমাকে শক্তি এবং ধৈর্য দিন।"**</p>
+        </div>
+
+        <!-- Chant Section -->
+        <div class="chant-section">
+            <h4 class="section-title">Chant Counter</h4>
+            <button id="chant-button" class="chant-button">Chant</button>
+            <p id="chant-counter" class="chant-counter">0/108</p>
+            <button id="reset-chant-btn" class="reset-chant-button">Reset</button>
+        </div>
+
+        <!-- Reset Section -->
+        <div class="reset-section">
+            <h4 class="section-title">Reset Tracker:</h4>
+            <input type="password" id="reset-password" placeholder="Enter Password" />
+            <button id="reset-btn" class="btn btn-danger">Reset Progress</button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const totalDays = 21;
+            const dayList = document.getElementById("day-list");
+            const progressText = document.getElementById("completed-days");
+            const submitBtn = document.getElementById("submit-btn");
+            const progressBar = document.getElementById("progress-bar");
+
+            // Load saved progress from localStorage (if any)
+            let completedDays = localStorage.getItem('completedDays') ? parseInt(localStorage.getItem('completedDays')) : 0;
+
+            // Function to update the progress display
+            function updateProgress() {
+                progressText.textContent = `${completedDays}/${totalDays} Days Completed`;
+                progressBar.style.width = `${(completedDays / totalDays) * 100}%`;
+            }
+
+            // Function to create the day checkboxes
+            function createDayList() {
+                dayList.innerHTML = '';  // Clear the list first
+                for (let i = 1; i <= totalDays; i++) {
+                    const li = document.createElement("li");
+                    const checkbox = document.createElement("input");
+                    checkbox.type = "checkbox";
+                    checkbox.disabled = true;
+                    checkbox.checked = i <= completedDays;
+                    li.appendChild(checkbox);
+                    li.appendChild(document.createTextNode(`Day ${i}`));
+                    dayList.appendChild(li);
+                }
+            }
+
+            // Submit progress for the day
+            submitBtn.addEventListener("click", function() {
+                if (completedDays < totalDays) {
+                    completedDays++;
+                    localStorage.setItem('completedDays', completedDays);
+                    createDayList();
+                    updateProgress();
+                } else {
+                    alert("You've already completed all 21 days!");
+                }
+            });
+
+            // Reset functionality
+            const resetPasswordInput = document.getElementById("reset-password");
+            const resetBtn = document.getElementById("reset-btn");
+
+            resetBtn.addEventListener("click", function() {
+                if (resetPasswordInput.value === "7980") {
+                    completedDays = 0;
+                    localStorage.setItem('completedDays', completedDays);
+                    createDayList();
+                    updateProgress();
+                    alert("Progress has been reset.");
+                } else {
+                    alert("Incorrect password.");
+                }
+            });
+
+            // Chant counter functionality
+            const chantButton = document.getElementById("chant-button");
+            const chantCounter = document.getElementById("chant-counter");
+            const resetChantButton = document.getElementById("reset-chant-btn");
+
+            let chantCount = 0;
+
+            chantButton.addEventListener("click", function() {
+                if (chantCount < 108) {
+                    chantCount++;
+                    chantCounter.textContent = `${chantCount}/108`;
+                    // Vibrate the device on chant
+                    if (navigator.vibrate) {
+                        navigator.vibrate(100);
+                    }
+                }
+            });
+
+            resetChantButton.addEventListener("click", function() {
+                const confirmation = prompt("Are you sure you want to reset the chant counter? Type 'YES' to confirm.");
+                if (confirmation === "YES") {
+                    chantCount = 0;
+                    chantCounter.textContent = "0/108";
+                }
+            });
+
+            // Initialize the tracker on page load
+            createDayList();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
